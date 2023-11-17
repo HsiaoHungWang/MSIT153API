@@ -10,7 +10,7 @@ builder.Services.AddDbContext<NorthwindContext>(options => options.UseSqlServer(
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-   // options.AddPolicy("AllowGet", builder => builder.AllowAnyOrigin().AllowGet().AllowAnyHeader());
+   options.AddPolicy("AllowGet", builder => builder.AllowAnyOrigin().WithMethods("GET").AllowAnyHeader());
 });
 
 
@@ -20,7 +20,7 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-app.UseCors("AllowAll");
+app.UseCors("AllowGet");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
